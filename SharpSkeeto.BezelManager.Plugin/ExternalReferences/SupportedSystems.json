@@ -1,0 +1,429 @@
+{
+  "Systems": {
+    "System": [
+      {
+        "SystemName": "Atari 2600",
+        "BezelFolder": "Atari2600",
+        "RepositoryName" : "Atari2600",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Stella",
+              "File" : "stella_libretro",
+              "ConfigFolder" : "Stella"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Atari 5200",
+        "BezelFolder": "Atari5200",
+        "RepositoryName" : "Atari5200",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Atari800",
+              "File" : "atari800_libretro",
+              "ConfigFolder" : "Atari800"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega 32x",
+        "BezelFolder": "Sega32X",
+        "RepositoryName" : "Sega32X",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Genesis Plus GX",
+              "File" : "genesis_plus_gx_libretro",
+              "ConfigFolder" : "Genesis Plus GX"
+            },
+            {
+              "Name" : "PicoDrive",
+              "File" : "picodrive_libretro",
+              "ConfigFolder" : "PicoDrive"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega CD",
+        "BezelFolder": "SegaCD",
+        "RepositoryName" : "SegaCD",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Genesis Plus GX",
+              "File" : "genesis_plus_gx_libretro",
+              "ConfigFolder" : "Genesis Plus GX"
+            },
+            {
+              "Name" : "Genesis Plus CD - Custom",
+              "File" : "genesis_plus_gx_libretro-cd",
+              "ConfigFolder" : "Genesis Plus CD"
+            },
+            {
+              "Name" : "PicoDrive",
+              "File" : "picodrive_libretro",
+              "ConfigFolder" : "PicoDrive"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sony Playstation",
+        "BezelFolder": "PSX",
+        "RepositoryName" : "PSX",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "PCSX-ReARMed",
+              "File" : "pcsx_rearmed_libretro",
+              "ConfigFolder" : "pcsx rearmed"
+            },
+            {
+              "Name" : "Mednafen PSX",
+              "File" : "mednafen_psx_libretro",
+              "ConfigFolder" : "mednafen psx"
+            },
+            {
+              "Name" : "Mednafen PSX HW",
+              "File" : "mednafen_psx_hw_libretro",
+              "ConfigFolder" : "mednafen psx hw"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega SG-1000",
+        "BezelFolder": "SG-1000",
+        "RepositoryName" : "SG-1000",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Genesis Plus GX",
+              "File" : "genesis_plus_gx_libretro",
+              "ConfigFolder" : "Genesis Plus GX"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega Master System",
+        "BezelFolder": "MasterSystem",
+        "RepositoryName" : "MasterSystem",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Genesis Plus GX",
+              "File" : "genesis_plus_gx_libretro",
+              "ConfigFolder" : "Genesis Plus GX"
+            },
+            {
+              "Name" : "PicoDrive",
+              "File" : "picodrive_libretro",
+              "ConfigFolder" : "PicoDrive"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega MegaDrive / Genesis",
+        "BezelFolder": "MegaDrive",
+        "RepositoryName" : "MegaDrive",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Genesis Plus GX",
+              "File" : "genesis_plus_gx_libretro",
+              "ConfigFolder" : "Genesis Plus GX"
+            },
+            {
+              "Name" : "PicoDrive",
+              "File" : "picodrive_libretro",
+              "ConfigFolder" : "PicoDrive"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Atari 7800",
+        "BezelFolder": "Atari7800",
+        "RepositoryName" : "Atari7800",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "ProSystem",
+              "File" : "prosystem_libretro",
+              "ConfigFolder" : "ProSystem"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "ColecoVision",
+        "BezelFolder": "ColecoVision",
+        "RepositoryName" : "ColecoVision",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "BlueMSX",
+              "File" : "bluemsx_libretro",
+              "ConfigFolder" : "BlueMSX"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Famicom",
+        "BezelFolder": "Famicom",
+        "RepositoryName" : "Famicom",
+        "Cores":
+        {
+          "Core":
+         [
+            {
+              "Name" : "FCEUmm",
+              "File" : "fceumm_libretro",
+              "ConfigFolder" : "FCEUmm"
+            },
+            {
+              "Name" : "Nestopia",
+              "File" : "nestopia_libretro",
+              "ConfigFolder" : "Nestopia"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Famicom Disk System",
+        "BezelFolder": "FDS",
+        "RepositoryName" : "FDS",
+        "Cores":
+        {
+          "Core":
+         [
+            {
+              "Name" : "FCEUmm",
+              "File" : "fceumm_libretro",
+              "ConfigFolder" : "FCEUmm"
+            },
+            {
+              "Name" : "Nestopia",
+              "File" : "nestopia_libretro",
+              "ConfigFolder" : "Nestopia"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Nintendo 64",
+        "BezelFolder": "N64",
+        "RepositoryName" : "N64",
+        "Cores":
+        {
+          "Core":
+         [
+            {
+              "Name" : "Mupen64Plus",
+              "File" : "mupen64_libretro",
+              "ConfigFolder" : "Mupen64Plus"
+            },
+            {
+              "Name" : "Mupen64Plus GLES3",
+              "File" : "mupen64_libretro",
+              "ConfigFolder" : "Mupen64Plus GLES3"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "GCE Vectrex",
+        "BezelFolder": "GCEVectrex",
+        "RepositoryName" : "GCEVectrex",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Vecx",
+              "File" : "vecx_libretro",
+              "ConfigFolder" : "Vecx"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "NEC PC Engine-CD",
+        "BezelFolder": "PCE-CD",
+        "RepositoryName" : "PCE-CD",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Mednafen PCE Fast",
+              "File" : "mednafen_pce_fast_libretro",
+              "ConfigFolder" : "Mednafen PCE Fast"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "NEC PC Engine",
+        "BezelFolder": "PCEEngine",
+        "RepositoryName" : "PCEngine",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Mednafen PCE Fast",
+              "File" : "mednafen_pce_fast_libretro",
+              "ConfigFolder" : "Mednafen PCE Fast"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "TurboGraphx-16",
+        "BezelFolder": "TG16",
+        "RepositoryName" : "TG16",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Mednafen PCE Fast",
+              "File" : "mednafen_pce_fast_libretro",
+              "ConfigFolder" : "Mednafen PCE Fast"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "TurboGraphx-16-CD",
+        "BezelFolder": "TG-CD",
+        "RepositoryName" : "TG-CD",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Mednafen PCE Fast",
+              "File" : "mednafen_pce_fast_libretro",
+              "ConfigFolder" : "Mednafen PCE Fast"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "SuperGrafx",
+        "BezelFolder": "SuperGrafx",
+        "RepositoryName" : "SuperGrafx",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Mednafen SuperGrafx",
+              "File" : "mednafen_pce_fast_libretro",
+              "ConfigFolder" : "Mednafen SuperGrafx"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Nintendo Entertainment System",
+        "BezelFolder": "NES",
+        "RepositoryName" : "NES",
+        "Cores":
+        {
+          "Core":
+           [
+            {
+              "Name" : "FCEUmm",
+              "File" : "fceumm_libretro",
+              "ConfigFolder" : "FCEUmm"
+            },
+            {
+              "Name" : "Nestopia",
+              "File" : "nestopia_libretro",
+              "ConfigFolder" : "Nestopia"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Super Nintendo Entertainment System",
+        "BezelFolder": "SNES",
+        "RepositoryName" : "SNES",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Snes9x",
+              "File" : "snes9x_libretro",
+              "ConfigFolder" : "Snes9x"
+            },
+            {
+              "Name" : "Snes9x 2010",
+              "File" : "snes9x_2010_libretro",
+              "ConfigFolder" : "Snes9x 2010"
+            },
+            {
+              "Name" : "BSNES-Mercury",
+              "File" : "bsnes_mercury_balanced_libretro",
+              "ConfigFolder" : "BNES-Mercury"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Super Famicom",
+        "BezelFolder": "SFC",
+        "RepositoryName" : "SFC",
+        "Cores":
+        {
+          "Core":
+          [
+            {
+              "Name" : "Snes9x 2010",
+              "File" : "snes9x_2010_libretro",
+              "ConfigFolder" : "Snes9x 2010"
+            },
+            {
+              "Name" : "Snes9x",
+              "File" : "snes9x_libretro",
+              "ConfigFolder" : "Snes9x"
+            }
+          ]
+        }
+      }
+      
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+The Bezel Project is setup with the following sytem-to-core mapping.
+
+
+To show a specific game bezel, Retroarch must have an override config file for each game.  These 
+configuration files are saved in special directories that are named according to the Retroarch 
+emulator core that system uses.
+
+
+The supplied Retroarch configuration files for the bezel utility are setup to use certain 
+emulators for certain systems.
+
+
+In order for the supplied bezels to be shown, you must be using the proper Retroarch emulator 
+for a system listed in the table below.
+
+
+This table lists all of the systems that have the abilty to show bezels that The Bezel Project 
+hopes to make bezels for.
+
+
+System                                          Retroarch Emulator Core
+Atari 2600                                      stella
+Atari 5200                                      atari800
+Atari 7800                                      prosystem
+ColecoVision                                    bluemsx
+GCE Vectrex                                     vecx
+NEC PC Engine CD                                beetle-pce-fast
+NEC PC Engine                                   beetle-pce-fast
+NEC SuperGrafx                                  beetle-supergrafx
+NEC TurboGrafx-CD                               beetle-pce-fast
+NEC TurboGrafx-16                               beetle-pce-fast
+Nintendo 64                                     Mupen64plus
+Nintendo Entertainment System                   fceumm, nestopia
+Nintendo Famicom Disk System                    fceumm, nestopia
+Nintendo Famicom                                fceumm, nestopia
+Nintendo Super Famicom                          snes9x, snes9x2010
+Sega 32X                                        picodrive, genesis-plus-gx
+Sega CD                                         picodrive, genesis-plus-gx
+Sega Genesis                                    picodrive, genesis-plus-gx
+Sega Master System                              picodrive, genesis-plus-gx
+Sega Mega Drive                                 picodrive, genesis-plus-gx
+Sega Mega Drive Japan                           picodrive, genesis-plus-gx
+Sega SG-1000                                    genesis-plus-gx
+Sony PlayStation                                pcsx-rearmed
+Super Nintendo Entertainment System             snes9x, snes9x2010
+ 
+ 
+ 
