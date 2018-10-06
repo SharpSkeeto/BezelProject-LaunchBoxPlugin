@@ -12,7 +12,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 
 		public string Caption => "SharpSkeeto's Bezel Manager...";
 
-		public Image IconImage => null;
+		public Image IconImage => BezelManagerResource.MenuIcon;
 
 		public bool ShowInBigBox => false;
 

@@ -16,6 +16,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		public FormAbout(string pluginFolder)
 		{
 			InitializeComponent();
+			this.Icon = BezelManagerResource.icon;
 			rtbAbout.Text = File.ReadAllText($@"{pluginFolder}TheBezelProjectInfo.txt");
 		}
 

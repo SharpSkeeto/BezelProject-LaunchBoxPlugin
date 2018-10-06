@@ -30,7 +30,10 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		public FormBezelManager()
 		{
 			InitializeComponent();
+			this.Icon = BezelManagerResource.icon;
 
+			// Should not need this for Win10+,  but lower windows operating systems might.
+			// LB may take care of this for us.  Not sure.
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 			ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, policyError) => { return true; };
 
@@ -101,7 +104,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		}
 
 		/// <summary>
-		/// 
+		/// May use this more in the future.
 		/// </summary>
 		private void DisableButtons()
 		{
@@ -308,6 +311,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 		/// <summary>
 		/// Edit retropie configs to work with relative paths in windows retroarch installations.
+		/// Someday these might be provided in a windows version of the repository, so this step might be removed later.
 		/// </summary>
 		/// <param name="progress"></param>
 		/// <param name="uri"></param>
@@ -435,7 +439,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		}
 
 		/// <summary>
-		/// Copy config and png files to retroarch directories based on core selected. (core override files)
+		/// Copy config and png files to the retroarch directories based on core selected (core game override files).
 		/// </summary>
 		/// <param name="progress"></param>
 		/// <param name="packageName"></param>
@@ -552,7 +556,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		}
 
 		/// <summary>
-		/// Cleanup the downloaded and edited files from temp folder.
+		/// Cleanup the downloaded and edited files from the temp folder.
 		/// </summary>
 		/// <param name="progress"></param>
 		/// <param name="message"></param>
@@ -616,17 +620,6 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			this.lblProgressTitle.Text = "Process complete!";
 		}
 
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			FormAbout about = new FormAbout(this.LaunchBoxPluginsFolder);
-			about.Show();
-		}
-		
 		/// <summary>
 		/// Stupid delete method to try to delete files in nested folders, since explorer tends to hang on to file handles... :/ 
 		/// </summary>
@@ -664,7 +657,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				}
 			}
 
-			throw new Exception("Unable to cleanup files. Please check to make sure no files are in use then try again.");
+			throw new Exception("Unable to cleanup all files. Please check to make sure no files are in use then try again.");
 			
 		}
 
@@ -707,6 +700,12 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			btnInstallBezel.Enabled = true;
 		}
 
+		/// <summary>
+		/// Menu event.
+		/// Clean up temporary files if present.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cleanUptoolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			try
@@ -718,6 +717,27 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			{
 				MessageBox.Show(ex.Message, "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+
+		/// <summary>
+		/// Exit the plugin.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		/// <summary>
+		/// Show About/Help.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FormAbout about = new FormAbout(this.LaunchBoxPluginsFolder);
+			about.Show();
 		}
 	}
 }

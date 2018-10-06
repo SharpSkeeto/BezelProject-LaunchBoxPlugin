@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SharpSkeeto.BezelManager.Plugin
 {
 	/// <summary>
-	/// Progress bar information
+	/// Progress bar area information
 	/// </summary>
 	internal class ProgressInfo
 	{
@@ -13,6 +13,9 @@ namespace SharpSkeeto.BezelManager.Plugin
 		public string ProgressTitle { get; set; }
 	}
 
+	/// <summary>
+	/// Classes for JSON serialization.
+	/// </summary>
 	public class SelectedBezelData
 	{
 		public Platform SelectedPlatform { get; set; }

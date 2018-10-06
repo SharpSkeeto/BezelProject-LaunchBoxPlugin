@@ -51,7 +51,7 @@
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
-			// About
+			// FormAbout
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -60,8 +60,7 @@
 			this.Controls.Add(this.rtbAbout);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "About";
-			this.ShowIcon = false;
+			this.Name = "FormAbout";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "About Bezel Manager";

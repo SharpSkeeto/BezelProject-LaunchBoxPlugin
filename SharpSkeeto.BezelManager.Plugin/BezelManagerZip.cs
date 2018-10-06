@@ -11,7 +11,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 	internal class BezelManagerZip : IDisposable
 	{
 		/// <summary>
-		/// 
+		/// Zip with progress reporting using M$ .Net implementions.
 		/// </summary>
 		/// <param name="sourceArchiveFileName"></param>
 		/// <param name="destinationDirectoryName"></param>

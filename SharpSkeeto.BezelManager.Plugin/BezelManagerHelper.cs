@@ -6,6 +6,11 @@ namespace SharpSkeeto.BezelManager.Plugin
 {
 	internal class BezelManagerHelper
 	{
+		/// <summary>
+		/// Get external reference data.
+		/// </summary>
+		/// <param name="filePath"></param>
+		/// <returns></returns>
 		internal SupportedSystemBezelData GetBezelData(string filePath)
 		{
 			string content = string.Empty;
@@ -16,9 +21,12 @@ namespace SharpSkeeto.BezelManager.Plugin
 			return JsonSerializer.Deserialize<SupportedSystemBezelData>(content);
 		}
 
+		/// <summary>
+		/// JSON Serializer / Deserializer methods using M$ .Net implementation classes.
+		/// </summary>
 		internal static class JsonSerializer
 		{
-			public static string Serialize<T>(T obj) where T : class, new()
+			internal static string Serialize<T>(T obj) where T : class, new()
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
@@ -28,7 +36,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 				}
 			}
 
-			public static T Deserialize<T>(string json) where T : class, new()
+			internal static T Deserialize<T>(string json) where T : class, new()
 			{
 				DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
 				using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
