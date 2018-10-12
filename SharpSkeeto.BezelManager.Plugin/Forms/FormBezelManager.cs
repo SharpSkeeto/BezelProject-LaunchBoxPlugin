@@ -61,6 +61,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				List<IEmulator> emulators = PluginHelper.DataManager.GetAllEmulators().ToList();
 				emulator = emulators.Find(e => e.ApplicationPath.ToLower().Contains("retroarch.exe"));
 			}
+
 			txtRetroInstallationFolder.BackColor = DefaultBackColor;
 			EmulatorInstallPath = (emulator != null) ? emulator.ApplicationPath : "Please configure Retroarch in LaunchBox before continuing.";
 			int i = EmulatorInstallPath.LastIndexOf(Path.DirectorySeparatorChar);
@@ -538,6 +539,20 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 						});
 					});
 
+					// Create core override config file.
+					// find the system config file if there is one.
+					// if there is no game overlay, display system overlay as a sub
+					if (true)
+					{
+						FileInfo file = OverlayFiles.Where(o => o.Directory.Name.ToLower().Equals("overlay")
+														&& o.Extension.Equals(".cfg")).FirstOrDefault();
+
+						if (file != null)
+						{
+							File.WriteAllText(Path.Combine(emuCfgPath, coreConfigFolder + ".cfg"), BezelManagerHelper.GenerateNewCoreOverride(packageName, file.Name));
+						}
+					}
+					
 					ConfigFiles.Clear();
 					OverlayFiles.Clear();
 

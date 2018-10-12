@@ -45,5 +45,28 @@ namespace SharpSkeeto.BezelManager.Plugin
 				}
 			}
 		}
+
+		/// <summary>
+		/// Set default core retroarch config file for overlay.
+		/// aspect_ratio_index = "22"
+		/// custom_viewport_height = "1073"
+		/// custom_viewport_width = "1435"
+		/// custom_viewport_x = "242"
+		/// custom_viewport_y = "3"
+		/// </summary>
+		/// <param name="packageName"></param>
+		/// <param name="coreName"></param>
+		/// <returns></returns>
+		internal static string GenerateNewCoreOverride(string packageName, string coreName)
+		{
+			string fileContent = $@"input_overlay = ""./overlays/GameBezels/{packageName}/{coreName}""" + "\n";
+			fileContent += "input_overlay_enable = \"true\"\n";
+			//fileContent += "aspect_ratio_index = \"22\"\n";
+			fileContent += "input_overlay_opacity = \"1.000000\"\n";
+			fileContent += "config_save_on_exit = \"false\"\n";
+			fileContent += "video_fullscreen = \"true\"\n";
+			return fileContent;
+		}
+			
 	}
 }
