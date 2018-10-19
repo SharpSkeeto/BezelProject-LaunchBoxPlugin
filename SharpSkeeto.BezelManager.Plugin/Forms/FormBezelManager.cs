@@ -81,8 +81,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			txtRetroInstallationFolder.Text = EmulatorInstallPath;
 			Directory.CreateDirectory(PluginTempFolder);
 
-			helper = new BezelManagerHelper();
-			SupportedSystemData = helper.GetBezelData(Path.Combine(LaunchBoxPluginsFolder, "SupportedSystems.json"));
+			//helper = new BezelManagerHelper();
+			SupportedSystemData = BezelManagerHelper.GetBezelData(Path.Combine(LaunchBoxPluginsFolder, "SupportedSystems.json"));
 			SelectedBezel = new SelectedBezelData();
 
 			foreach (var item in SupportedSystemData.Systems.System)

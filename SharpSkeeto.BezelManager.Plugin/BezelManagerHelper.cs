@@ -11,7 +11,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 		/// </summary>
 		/// <param name="filePath"></param>
 		/// <returns></returns>
-		internal SupportedSystemBezelData GetBezelData(string filePath)
+		internal static SupportedSystemBezelData GetBezelData(string filePath)
 		{
 			string content = string.Empty;
 			using (StreamReader sr = new StreamReader(filePath))
@@ -59,11 +59,15 @@ namespace SharpSkeeto.BezelManager.Plugin
 		/// <returns></returns>
 		internal static string GenerateNewCoreOverride(string packageName, string coreName)
 		{
-			string fileContent = $@"input_overlay = ""./overlays/GameBezels/{packageName}/{coreName}""" + "\n";
-			fileContent += "input_overlay_enable = \"true\"\n";
-			//fileContent += "aspect_ratio_index = \"22\"\n";
-			fileContent += "input_overlay_opacity = \"1.000000\"\n";
+			string fileContent = $@"input_overlay = "".\overlays\GameBezels\{packageName}\{coreName}""" + "\n";
+			fileContent += "aspect_ratio_index = \"23\"\n";
 			fileContent += "config_save_on_exit = \"false\"\n";
+			fileContent += "custom_viewport_width = \"1396\"\n";
+			fileContent += "custom_viewport_height = \"1052\"\n";
+			fileContent += "custom_viewport_x = \"262\"\n";
+			fileContent += "custom_viewport_y = \"18\"\n";
+			fileContent += "input_overlay_enable = \"true\"\n";
+			fileContent += "input_overlay_opacity = \"1.000000\"\n";
 			fileContent += "video_fullscreen = \"true\"\n";
 			return fileContent;
 		}
