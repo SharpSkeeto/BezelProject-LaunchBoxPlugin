@@ -37,6 +37,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 		public string SystemName { get; set; }
 		public string BezelFolder { get; set; }
 		public string RepositoryName { get; set; }
+		public ViewPort ViewPort { get; set; }
 		public Cores Cores { get; set; }
 	}
 
@@ -50,5 +51,13 @@ namespace SharpSkeeto.BezelManager.Plugin
 		public string Name { get; set; }
 		public string File { get; set; }
 		public string ConfigFolder { get; set; }
+	}
+
+	public class ViewPort
+	{
+		public int x { get; set; }
+		public int w { get; set; }
+		public int h { get; set; }
+		public int y { get; set; }
 	}
 }

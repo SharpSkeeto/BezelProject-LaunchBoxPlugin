@@ -57,18 +57,25 @@ namespace SharpSkeeto.BezelManager.Plugin
 		/// <param name="packageName"></param>
 		/// <param name="coreName"></param>
 		/// <returns></returns>
-		internal static string GenerateNewCoreOverride(string packageName, string coreName)
+		internal static string GenerateNewCoreOverride(Platform selectedPlatform, string coreName)
 		{
-			string fileContent = $@"input_overlay = "".\overlays\GameBezels\{packageName}\{coreName}""" + "\n";
-			fileContent += "aspect_ratio_index = \"23\"\n";
+			string fileContent = $@"input_overlay = "".\overlays\GameBezels\{selectedPlatform.RepositoryName}\{coreName}""" + "\n";
 			fileContent += "config_save_on_exit = \"false\"\n";
-			fileContent += "custom_viewport_width = \"1396\"\n";
-			fileContent += "custom_viewport_height = \"1052\"\n";
-			fileContent += "custom_viewport_x = \"262\"\n";
-			fileContent += "custom_viewport_y = \"18\"\n";
 			fileContent += "input_overlay_enable = \"true\"\n";
 			fileContent += "input_overlay_opacity = \"1.000000\"\n";
 			fileContent += "video_fullscreen = \"true\"\n";
+
+			ViewPort vp = selectedPlatform.ViewPort != null ? selectedPlatform.ViewPort : null;
+
+			if (vp != null)
+			{
+				fileContent += "aspect_ratio_index = \"23\"\n";
+				fileContent += $"custom_viewport_width = \"{vp.w}\"\n";
+				fileContent += $"custom_viewport_height = \"{vp.h}\"\n";
+				fileContent += $"custom_viewport_x = \"{vp.x}\"\n";
+				fileContent += $"custom_viewport_y = \"{vp.y}\"\n";
+			}
+			
 			return fileContent;
 		}
 			

@@ -13,7 +13,6 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 {
 	public partial class FormBezelManager : Form
 	{
-		BezelManagerHelper helper;
 		SupportedSystemBezelData SupportedSystemData;
 		SelectedBezelData SelectedBezel;
 		Progress<ProgressInfo> progressInfo;
@@ -82,7 +81,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			Directory.CreateDirectory(PluginTempFolder);
 
 			//helper = new BezelManagerHelper();
-			SupportedSystemData = BezelManagerHelper.GetBezelData(Path.Combine(LaunchBoxPluginsFolder, "SupportedSystems.json"));
+			SupportedSystemData = BezelManagerHelper.GetBezelData(Path.Combine(LaunchBoxPluginsFolder, "BezelManagerSupportedSystems.json"));
 			SelectedBezel = new SelectedBezelData();
 
 			foreach (var item in SupportedSystemData.Systems.System)
@@ -138,12 +137,9 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				if (SelectedBezel.SelectedCore == null)
 					throw new Exception("Please select a system core...");
 
-				string PackageName = SelectedBezel.SelectedPlatform.RepositoryName;
-				string CoreConfigFolder = SelectedBezel.SelectedCore.ConfigFolder;
-
-				lblProgressTitle.Text = string.Format("Processing {0} Bezel Package.", PackageName);
+				lblProgressTitle.Text = string.Format("Processing {0} Bezel Package.", SelectedBezel.SelectedPlatform.RepositoryName);
 				
-				Task ProcessPackageTask = Task.Run(() => ProcessPackage(PackageName, CoreConfigFolder, progressInfo, token), token);
+				Task ProcessPackageTask = Task.Run(() => ProcessPackage(SelectedBezel.SelectedPlatform, SelectedBezel.SelectedCore, progressInfo, token), token);
 				await ProcessPackageTask.ContinueWith((t) =>
 					{
 						if (t.IsFaulted)
@@ -179,7 +175,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		/// <param name="packageName"></param>
 		/// <param name="progress"></param>
 		/// <param name="token"></param>
-		private void ProcessPackage(string packageName, string coreConfigFolder, IProgress<ProgressInfo> progress, CancellationToken token)
+		private void ProcessPackage(Platform selectedPlatform, Core selectedCore, IProgress<ProgressInfo> progress, CancellationToken token)
 		{
 			try
 			{
@@ -188,7 +184,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				Task<bool> editFiles = null;
 				Task<bool> copyFiles = null;
 
-				string PackageUri = string.Format("https://github.com/thebezelproject/bezelproject-{0}/archive/master.zip", packageName);
+				string PackageUri = string.Format("https://github.com/thebezelproject/bezelproject-{0}/archive/master.zip", selectedPlatform.RepositoryName);
 
 				dl = DownloadMasterArchiveAsync(progress, PackageUri, token);
 
@@ -199,12 +195,12 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 				if(unpak.Result)
 				{
-					editFiles = EditConfigFiles(progress, packageName, token);
+					editFiles = EditConfigFiles(progress, selectedPlatform, token);
 				}
 
 				if(editFiles.Result)
 				{
-					copyFiles = CopyBezelFiles(progress, packageName, coreConfigFolder, token);
+					copyFiles = CopyBezelFiles(progress, selectedPlatform, selectedCore, token);
 				}
 
 				if (copyFiles.Result)
@@ -318,14 +314,14 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		/// <param name="uri"></param>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		private Task<bool> EditConfigFiles(IProgress<ProgressInfo> progress, string packageName, CancellationToken token)
+		private Task<bool> EditConfigFiles(IProgress<ProgressInfo> progress, Platform selectedPlatform, CancellationToken token)
 		{
 			try
 			{
 				const string OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/";
 				const string ReplacementPath = "./overlays/";
 
-				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, packageName);
+				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
 								
 				if (!token.IsCancellationRequested)
 				{
@@ -345,33 +341,33 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 														   .FirstOrDefault();
 
 					DirectoryInfo overlayFolder = rootFolder.GetDirectories("*", SearchOption.AllDirectories)
-															  .Where(d => d.Name.ToLower().Equals("overlay"))
-															.FirstOrDefault();
+														    .Where(d => d.Name.ToLower().Equals("overlay"))
+														    .FirstOrDefault();
 
 					if (configFolder == null)
 					{
-						throw new Exception(string.Format("No config folder found in {0} package!", packageName));
+						throw new Exception(string.Format("No config folder found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					if (overlayFolder == null)
 					{
-						throw new Exception(string.Format("No overlay folder found in {0} package!", packageName));
+						throw new Exception(string.Format("No overlay folder found in {0} package!", selectedPlatform.RepositoryName));
 					}
 
 					List<FileInfo> ConfigFiles = configFolder.GetFiles("*.*", SearchOption.AllDirectories)
-												 .Where(f => f.Name.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase))
-												 .ToList();
+															 .Where(f => f.Name.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase))
+															 .ToList();
 
 					List<FileInfo> OverlayFiles = overlayFolder.GetFiles("*.*", SearchOption.AllDirectories)
-												  .Where(f => f.Name.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase))
-												  .ToList();
+															   .Where(f => f.Name.EndsWith(".cfg", StringComparison.OrdinalIgnoreCase))
+															   .ToList();
 
 					if (ConfigFiles.Count == 0)
 					{
-						throw new Exception(string.Format("No config files found in {0} package!", packageName));
+						throw new Exception(string.Format("No config files found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					if (OverlayFiles.Count == 0)
 					{
-						throw new Exception(string.Format("No overlay files found in {0} package!", packageName));
+						throw new Exception(string.Format("No overlay files found in {0} package!", selectedPlatform.RepositoryName));
 					}
 
 					int TotalNumberOfFiles = ConfigFiles.Count() + OverlayFiles.Count();
@@ -446,11 +442,11 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		/// <param name="packageName"></param>
 		/// <param name="token"></param>
 		/// <returns></returns>
-		private Task<bool> CopyBezelFiles(IProgress<ProgressInfo> progress, string packageName, string coreConfigFolder, CancellationToken token)
+		private Task<bool> CopyBezelFiles(IProgress<ProgressInfo> progress, Platform selectedPlatform, Core selectedCore, CancellationToken token)
 		{
 			try
 			{
-				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, packageName);
+				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
 
 				if (!token.IsCancellationRequested)
 				{
@@ -466,9 +462,9 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					int TotalNumberOfFiles = 0; 
 					int ProcessedFile = 0;
 					
-					string emuCfgPath = Path.Combine($@"{EmulatorInstallPath}\config", coreConfigFolder);
+					string emuCfgPath = Path.Combine($@"{EmulatorInstallPath}\config", selectedCore.ConfigFolder);
 					Directory.CreateDirectory(emuCfgPath);
-					string emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", packageName);
+					string emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", selectedPlatform.RepositoryName);
 					Directory.CreateDirectory(emuOverlayPath);
 
 					// find the config and overlay folders.
@@ -483,11 +479,11 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 					if (configFolder == null)
 					{
-						throw new Exception(string.Format("No config folder found in {0} package!", packageName));
+						throw new Exception(string.Format("No config folder found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					if (overlayFolder == null)
 					{
-						throw new Exception(string.Format("No overlay folder found in {0} package!", packageName));
+						throw new Exception(string.Format("No overlay folder found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					
 					List<FileInfo> ConfigFiles = configFolder.GetFiles("*.*", SearchOption.AllDirectories)
@@ -501,11 +497,11 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 					if(ConfigFiles.Count == 0)
 					{
-						throw new Exception(string.Format("No config files found in {0} package!", packageName));
+						throw new Exception(string.Format("No config files found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					if (OverlayFiles.Count == 0)
 					{
-						throw new Exception(string.Format("No overlay files found in {0} package!", packageName));
+						throw new Exception(string.Format("No overlay files found in {0} package!", selectedPlatform.RepositoryName));
 					}
 					
 					TotalNumberOfFiles = ConfigFiles.Count() + OverlayFiles.Count();
@@ -540,16 +536,28 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					});
 
 					// Create core override config file.
-					// find the system config file if there is one.
-					// if there is no game overlay, display system overlay as a sub
-					if (true)
+					// Backup existing one for manual restore.
+					// Find the system core config file if there is one.
+					// If there is no game overlay, display system overlay as a sub
+					// May add user selection to enable/disable this function in the future.
+					if (true)  
 					{
 						FileInfo file = OverlayFiles.Where(o => o.Directory.Name.ToLower().Equals("overlay")
-														&& o.Extension.Equals(".cfg")).FirstOrDefault();
+														     && o.Extension.Equals(".cfg")).FirstOrDefault();
+
+						string coreCfgPath = Path.Combine(emuCfgPath, selectedCore.ConfigFolder + ".cfg");
+						string coreCfgBackUp = Path.Combine(emuCfgPath, selectedCore.ConfigFolder + ".bak");
 
 						if (file != null)
 						{
-							File.WriteAllText(Path.Combine(emuCfgPath, coreConfigFolder + ".cfg"), BezelManagerHelper.GenerateNewCoreOverride(packageName, file.Name));
+							if (File.Exists(coreCfgPath))
+							{
+								// make backup
+								if (File.Exists(coreCfgBackUp))
+									File.Delete(coreCfgBackUp); 
+								File.Copy(coreCfgPath, coreCfgBackUp);
+							}
+							File.WriteAllText(coreCfgPath, BezelManagerHelper.GenerateNewCoreOverride(selectedPlatform, file.Name));
 						}
 					}
 					

@@ -19,6 +19,12 @@
         "SystemName": "Atari 5200",
         "BezelFolder": "Atari5200",
         "RepositoryName": "Atari5200",
+        "ViewPort": {
+          "x": 250,
+          "w": 1420,
+          "h": 1052,
+          "y": 18
+        },
         "Cores": {
           "Core": [
             {
@@ -33,6 +39,12 @@
         "SystemName": "Sega 32x",
         "BezelFolder": "Sega32X",
         "RepositoryName": "Sega32X",
+        "ViewPort": {
+          "x": 205,
+          "w": 1510,
+          "h": 1052,
+          "y": 14
+        },
         "Cores": {
           "Core": [
             {
@@ -57,6 +69,12 @@
         "SystemName": "Sega CD",
         "BezelFolder": "SegaCD",
         "RepositoryName": "SegaCD",
+        "ViewPort": {
+          "x": 248,
+          "w": 1424,
+          "h": 1052,
+          "y": 14
+        },
         "Cores": {
           "Core": [
             {
@@ -110,6 +128,12 @@
         "SystemName": "Sega SG-1000",
         "BezelFolder": "SG-1000",
         "RepositoryName": "SG-1000",
+        "ViewPort": {
+          "x": 150,
+          "w": 1620,
+          "h": 1052,
+          "y": 14
+        },
         "Cores": {
           "Core": [
             {
@@ -129,6 +153,12 @@
         "SystemName": "Sega Master System",
         "BezelFolder": "MasterSystem",
         "RepositoryName": "MasterSystem",
+        "ViewPort": {
+          "x": 284,
+          "w": 1400,
+          "h": 1076,
+          "y": 2
+        },
         "Cores": {
           "Core": [
             {
@@ -158,6 +188,12 @@
         "SystemName": "Sega MegaDrive / Genesis",
         "BezelFolder": "MegaDrive",
         "RepositoryName": "MegaDrive",
+        "ViewPort": {
+          "x": 248,
+          "w": 1424,
+          "h": 1052,
+          "y": 14
+        },
         "Cores": {
           "Core": [
             {
@@ -177,6 +213,12 @@
         "SystemName": "Atari 7800",
         "BezelFolder": "Atari7800",
         "RepositoryName": "Atari7800",
+        "ViewPort": {
+          "x": 242,
+          "w": 1435,
+          "h": 1073,
+          "y": 3
+        },
         "Cores": {
           "Core": [
             {
@@ -272,6 +314,12 @@
         "SystemName": "GCE Vectrex",
         "BezelFolder": "GCEVectrex",
         "RepositoryName": "GCEVectrex",
+        "ViewPort": {
+          "x": 0,
+          "w": 800,
+          "h": 1020,
+          "y": 0
+        },
         "Cores": {
           "Core": [
             {
@@ -357,12 +405,18 @@
         "SystemName": "SuperGrafx",
         "BezelFolder": "SuperGrafx",
         "RepositoryName": "SuperGrafx",
+        "ViewPort": {
+          "x": 326,
+          "w": 1260,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
               "Name": "Beetle SuperGrafx",
               "File": "mednafen_supergrafx_libretro",
-              "ConfigFolder": "Beetle SGX"
+              "ConfigFolder": "Mednafen SuperGrafx"
             }
           ]
         }
@@ -371,6 +425,12 @@
         "SystemName": "Nintendo Entertainment System",
         "BezelFolder": "NES",
         "RepositoryName": "NES",
+        "ViewPort": {
+          "x": 262,
+          "w": 1396,
+          "h": 1052,
+          "y": 18
+        },
         "Cores": {
           "Core": [
             {
@@ -395,6 +455,12 @@
         "SystemName": "Super Nintendo Entertainment System",
         "BezelFolder": "SNES",
         "RepositoryName": "SNES",
+        "ViewPort": {
+          "x": 250,
+          "w": 1420,
+          "h": 1052,
+          "y": 18
+        },
         "Cores": {
           "Core": [
             {
@@ -424,6 +490,12 @@
         "SystemName": "Super Famicom",
         "BezelFolder": "SFC",
         "RepositoryName": "SFC",
+        "ViewPort": {
+          "x": 250,
+          "w": 1420,
+          "h": 1052,
+          "y": 18
+        },
         "Cores": {
           "Core": [
             {
