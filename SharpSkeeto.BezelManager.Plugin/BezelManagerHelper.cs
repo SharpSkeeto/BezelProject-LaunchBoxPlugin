@@ -59,7 +59,16 @@ namespace SharpSkeeto.BezelManager.Plugin
 		/// <returns></returns>
 		internal static string GenerateNewCoreOverride(Platform selectedPlatform, string coreName)
 		{
-			string fileContent = $@"input_overlay = "".\overlays\GameBezels\{selectedPlatform.RepositoryName}\{coreName}""" + "\n";
+			string fileContent = string.Empty;
+
+			if (selectedPlatform.SystemName.Equals("Arcade"))
+			{
+				fileContent = @"input_overlay = """"" + "\n";
+			}
+			else
+			{
+				fileContent = $@"input_overlay = "".\overlays\GameBezels\{selectedPlatform.RepositoryName}\{coreName}""" + "\n";
+			}
 			fileContent += "config_save_on_exit = \"false\"\n";
 			fileContent += "input_overlay_enable = \"true\"\n";
 			fileContent += "input_overlay_opacity = \"1.000000\"\n";

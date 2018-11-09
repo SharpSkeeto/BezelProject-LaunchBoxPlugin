@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.lblLaunchBoxInstallation = new System.Windows.Forms.Label();
 			this.txtRetroInstallationFolder = new System.Windows.Forms.TextBox();
 			this.gbStatusArea = new System.Windows.Forms.GroupBox();
@@ -46,6 +47,8 @@
 			this.lblSystems = new System.Windows.Forms.Label();
 			this.lblSelectCore = new System.Windows.Forms.Label();
 			this.cbCoreList = new System.Windows.Forms.ComboBox();
+			this.chkKeepMasterFile = new System.Windows.Forms.CheckBox();
+			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.gbStatusArea.SuspendLayout();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
@@ -127,7 +130,7 @@
 			// btnInstallBezel
 			// 
 			this.btnInstallBezel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnInstallBezel.Location = new System.Drawing.Point(151, 209);
+			this.btnInstallBezel.Location = new System.Drawing.Point(151, 191);
 			this.btnInstallBezel.Name = "btnInstallBezel";
 			this.btnInstallBezel.Size = new System.Drawing.Size(123, 52);
 			this.btnInstallBezel.TabIndex = 8;
@@ -228,11 +231,22 @@
 			this.cbCoreList.TabIndex = 14;
 			this.cbCoreList.SelectedIndexChanged += new System.EventHandler(this.cbCoreList_SelectedIndexChanged);
 			// 
+			// chkKeepMasterFile
+			// 
+			this.chkKeepMasterFile.AutoSize = true;
+			this.chkKeepMasterFile.Location = new System.Drawing.Point(13, 262);
+			this.chkKeepMasterFile.Name = "chkKeepMasterFile";
+			this.chkKeepMasterFile.Size = new System.Drawing.Size(205, 17);
+			this.chkKeepMasterFile.TabIndex = 15;
+			this.chkKeepMasterFile.Text = "Remove master files after processing?";
+			this.chkKeepMasterFile.UseVisualStyleBackColor = true;
+			// 
 			// FormBezelManager
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(421, 363);
+			this.Controls.Add(this.chkKeepMasterFile);
 			this.Controls.Add(this.cbCoreList);
 			this.Controls.Add(this.lblSelectCore);
 			this.Controls.Add(this.lblSystems);
@@ -277,5 +291,7 @@
 		private System.Windows.Forms.ComboBox cbCoreList;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem cleanUptoolStripMenuItem;
+		private System.Windows.Forms.CheckBox chkKeepMasterFile;
+		private System.Windows.Forms.ToolTip toolTip;
 	}
 }

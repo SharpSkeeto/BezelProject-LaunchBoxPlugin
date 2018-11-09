@@ -80,7 +80,6 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			txtRetroInstallationFolder.Text = EmulatorInstallPath;
 			Directory.CreateDirectory(PluginTempFolder);
 
-			//helper = new BezelManagerHelper();
 			SupportedSystemData = BezelManagerHelper.GetBezelData(Path.Combine(LaunchBoxPluginsFolder, "BezelManagerSupportedSystems.json"));
 			SelectedBezel = new SelectedBezelData();
 
@@ -101,6 +100,11 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			});
 
 			DisableButtons();
+
+			toolTip.SetToolTip(this.btnInstallBezel, "Downloads and processes selected Bezel package.");
+			toolTip.SetToolTip(this.chkKeepMasterFile, "Zip file(s) will be located in the 't' folder inside the plugin folder.");
+			toolTip.SetToolTip(this.btnCancel, "Cancels Bezel installation process.");
+			
 		}
 
 		/// <summary>
@@ -109,7 +113,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		private void DisableButtons()
 		{
 			btnInstallBezel.Enabled = false;
-			//btnCancel.Enabled = false;
+			btnCancel.Enabled = false;
 		}
 
 
@@ -136,6 +140,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 				if (SelectedBezel.SelectedCore == null)
 					throw new Exception("Please select a system core...");
+
+				SetInProcessControls();
 
 				lblProgressTitle.Text = string.Format("Processing {0} Bezel Package.", SelectedBezel.SelectedPlatform.RepositoryName);
 				
@@ -190,7 +196,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 
 				if (dl.Result)
 				{
-					unpak = UnpackMasterArchive(progress, string.Format("{0}master.zip", PluginTempFolder), token);
+					unpak = UnpackMasterArchive(progress, string.Format("{0}{1}-{2}", PluginTempFolder, SelectedBezel.SelectedPlatform.RepositoryName, "master.zip"), token);
 				}
 
 				if(unpak.Result)
@@ -229,8 +235,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			try
 			{
 				long TotalBytesDownloaded = 0;
-				int index = uri.LastIndexOf("/");
-				string newFileName = uri.Substring(index + 1);
+				string newFileName = string.Format("{0}-{1}", SelectedBezel.SelectedPlatform.RepositoryName, "master.zip");
 
 				CleanupWorkingFiles(progress, PluginTempFolder);
 
@@ -318,11 +323,14 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		{
 			try
 			{
-				const string OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/";
-				const string ReplacementPath = "./overlays/";
-
 				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
-								
+				string OriginalPath = string.Empty;
+				string ReplacementPath = string.Empty;
+				
+				// Bugfix for ArcadeBezels folder
+				OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/GameBezels/";
+				ReplacementPath = "./overlays/GameBezels/";
+				
 				if (!token.IsCancellationRequested)
 				{
 
@@ -377,14 +385,36 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					ParallelOptions options = new ParallelOptions
 					{
 						CancellationToken = token,
-						MaxDegreeOfParallelism = 4
+						MaxDegreeOfParallelism = 2
 					};
 
 					Parallel.ForEach(ConfigFiles, options, ConfigFile =>
 					{
 						token.ThrowIfCancellationRequested();
 						string content = File.ReadAllText(ConfigFile.FullName);
+
+						// Bugfix for ArcadeBezels folder
+						if (selectedPlatform.RepositoryName.Equals("MAME"))
+						{
+							if(content.Contains("MAME-Vertical.cfg"))
+							{
+								OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/MAME-Vertical.cfg";
+								ReplacementPath = "./overlays/ArcadeBezels/MAME-Vertical.cfg";
+							}
+							else if(content.Contains("MAME-Horizontal.cfg"))
+							{
+								OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/MAME-Horizontal.cfg";
+								ReplacementPath = "./overlays/ArcadeBezels/MAME-Horizontal.cfg";
+							}
+							else
+							{
+								OriginalPath = "/opt/retropie/configs/all/retroarch/overlay/ArcadeBezels/";
+								ReplacementPath = "./overlays/ArcadeBezels/";
+							}
+						}
+
 						content = content.Replace(OriginalPath, ReplacementPath);
+
 						File.WriteAllText(ConfigFile.FullName, content);
 						progress?.Report(new ProgressInfo()
 						{
@@ -447,6 +477,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			try
 			{
 				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
+				string emuOverlayPath = string.Empty;
 
 				if (!token.IsCancellationRequested)
 				{
@@ -464,7 +495,17 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					
 					string emuCfgPath = Path.Combine($@"{EmulatorInstallPath}\config", selectedCore.ConfigFolder);
 					Directory.CreateDirectory(emuCfgPath);
-					string emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", selectedPlatform.RepositoryName);
+
+					// Bugfix for ArcadeBezels folder
+					if (selectedPlatform.RepositoryName.Equals("MAME"))
+					{
+						emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\ArcadeBezels");
+					}
+					else
+					{
+						emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", selectedPlatform.RepositoryName);
+					}
+
 					Directory.CreateDirectory(emuOverlayPath);
 
 					// find the config and overlay folders.
@@ -509,7 +550,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					ParallelOptions options = new ParallelOptions
 					{
 						CancellationToken = token,
-						MaxDegreeOfParallelism = 4
+						MaxDegreeOfParallelism = 2
 					};
 
 					// now copy files to the Retroarch locations.
@@ -589,25 +630,28 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		{
 			try
 			{
-				int i = 0;
-
 				// find the working folders.
 				List<DirectoryInfo> subFolders = new DirectoryInfo(rootFolder).GetDirectories().ToList();
-				int folders = subFolders.Count;
-				string MasterZip = Path.Combine(rootFolder, "master.zip");
-
-				if (File.Exists(MasterZip)) { File.Delete(MasterZip); }
-
+				
 				foreach (DirectoryInfo folder in subFolders)
 				{
-					i++;
 					progress?.Report(new ProgressInfo()
 					{
-						ProgressValue = (i * 100 / folders),
-						ProgressStatus = "Removing temporary files and folders..."
+						ProgressValue = 0,
+						ProgressStatus = "Removing temporary files... (This may take a few seconds)"
 					});
 					Task deleteDir = TryDeleteDirectory(folder.FullName);
 				}
+
+				if (chkKeepMasterFile.Checked)
+				{
+					var dir = new DirectoryInfo(rootFolder);
+					foreach (var file in dir.EnumerateFiles("*.zip"))
+					{
+						file.Delete();
+					}
+				}
+
 			}
 			catch (Exception)
 			{
@@ -632,6 +676,11 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		{
 			ResetProgressBar();
 			lblProgressTitle.Text = "Operation canceled!";
+			this.btnCancel.Enabled = false;
+			this.btnInstallBezel.Enabled = true;
+			this.cbSystemList.Enabled = true;
+			this.cbCoreList.Enabled = true;
+			this.mainMenu.Enabled = true;
 		}
 
 		private void ResetCompletedControls()
@@ -641,6 +690,20 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			this.pbProgressStatus.MarqueeAnimationSpeed = 0;
 			this.lblProgessStatus.Text = string.Empty;
 			this.lblProgressTitle.Text = "Process complete!";
+			this.btnCancel.Enabled = false;
+			this.btnInstallBezel.Enabled = true;
+			this.cbSystemList.Enabled = true;
+			this.cbCoreList.Enabled = true;
+			this.mainMenu.Enabled = true;
+		}
+
+		private void SetInProcessControls()
+		{
+			this.btnInstallBezel.Enabled = false;
+			this.cbSystemList.Enabled = false;
+			this.cbCoreList.Enabled = false;
+			this.btnCancel.Enabled = true;
+			this.mainMenu.Enabled = false;
 		}
 
 		/// <summary>
@@ -680,7 +743,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				}
 			}
 
-			throw new Exception("Unable to cleanup all files. Please check to make sure no files are in use then try again.");
+			throw new Exception("Unable to cleanup all files. Please check to make sure no files are in use, then try again.");
 			
 		}
 
@@ -759,7 +822,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		/// <param name="e"></param>
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			FormAbout about = new FormAbout(this.LaunchBoxPluginsFolder);
+			FormAbout about = new FormAbout();
 			about.Show();
 		}
 	}

@@ -528,7 +528,7 @@
         "Cores": {
           "Core": [
             {
-              "Name": "Final Burn",
+              "Name": "Final Burn Alpha",
               "File": "fbalpha_libretro",
               "ConfigFolder": "FB Alpha"
             },
