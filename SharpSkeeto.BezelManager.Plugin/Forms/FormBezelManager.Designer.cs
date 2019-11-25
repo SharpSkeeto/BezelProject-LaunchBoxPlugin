@@ -49,6 +49,7 @@
 			this.cbCoreList = new System.Windows.Forms.ComboBox();
 			this.chkKeepMasterFile = new System.Windows.Forms.CheckBox();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.chkSystemArt = new System.Windows.Forms.CheckBox();
 			this.gbStatusArea.SuspendLayout();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
@@ -84,7 +85,7 @@
 			this.gbStatusArea.Controls.Add(this.lblProgessStatus);
 			this.gbStatusArea.Controls.Add(this.pbProgressStatus);
 			this.gbStatusArea.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.gbStatusArea.Location = new System.Drawing.Point(0, 285);
+			this.gbStatusArea.Location = new System.Drawing.Point(0, 323);
 			this.gbStatusArea.Name = "gbStatusArea";
 			this.gbStatusArea.Size = new System.Drawing.Size(421, 78);
 			this.gbStatusArea.TabIndex = 7;
@@ -234,18 +235,29 @@
 			// chkKeepMasterFile
 			// 
 			this.chkKeepMasterFile.AutoSize = true;
-			this.chkKeepMasterFile.Location = new System.Drawing.Point(13, 262);
+			this.chkKeepMasterFile.Location = new System.Drawing.Point(13, 300);
 			this.chkKeepMasterFile.Name = "chkKeepMasterFile";
 			this.chkKeepMasterFile.Size = new System.Drawing.Size(205, 17);
 			this.chkKeepMasterFile.TabIndex = 15;
 			this.chkKeepMasterFile.Text = "Remove master files after processing?";
 			this.chkKeepMasterFile.UseVisualStyleBackColor = true;
 			// 
+			// chkSystemArt
+			// 
+			this.chkSystemArt.AutoSize = true;
+			this.chkSystemArt.Location = new System.Drawing.Point(13, 277);
+			this.chkSystemArt.Name = "chkSystemArt";
+			this.chkSystemArt.Size = new System.Drawing.Size(217, 17);
+			this.chkSystemArt.TabIndex = 16;
+			this.chkSystemArt.Text = "Install system art bezel pack if available?";
+			this.chkSystemArt.UseVisualStyleBackColor = true;
+			// 
 			// FormBezelManager
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(421, 363);
+			this.ClientSize = new System.Drawing.Size(421, 401);
+			this.Controls.Add(this.chkSystemArt);
 			this.Controls.Add(this.chkKeepMasterFile);
 			this.Controls.Add(this.cbCoreList);
 			this.Controls.Add(this.lblSelectCore);
@@ -293,5 +305,6 @@
 		private System.Windows.Forms.ToolStripMenuItem cleanUptoolStripMenuItem;
 		private System.Windows.Forms.CheckBox chkKeepMasterFile;
 		private System.Windows.Forms.ToolTip toolTip;
+		private System.Windows.Forms.CheckBox chkSystemArt;
 	}
 }

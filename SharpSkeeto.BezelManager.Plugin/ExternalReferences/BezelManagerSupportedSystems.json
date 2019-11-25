@@ -5,6 +5,12 @@
         "SystemName": "Atari 2600",
         "BezelFolder": "Atari2600",
         "RepositoryName": "Atari2600",
+        "ViewPort": {
+          "x": 250,
+          "w": 1420,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
@@ -31,6 +37,25 @@
               "Name": "Atari800",
               "File": "atari800_libretro",
               "ConfigFolder": "Atari800"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Atari Lynx",
+        "BezelFolder": "AtariLynx",
+        "RepositoryName": "AtariLynx",
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Handy",
+              "File": "handy_libretro",
+              "ConfigFolder": "Handy"
+            },
+            {
+              "Name": "Beetle Lynx",
+              "File": "mednafen_lynx_libretro",
+              "ConfigFolder": "Beetle Lynx"
             }
           ]
         }
@@ -96,6 +121,31 @@
               "Name": "PicoDrive CD - Split Core",
               "File": "picodrive_libretro-cd",
               "ConfigFolder": "PicoDr_CD"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega Game Gear",
+        "BezelFolder": "GameGear",
+        "RepositoryName": "GameGear",
+        "ViewPort": {
+          "x": 260,
+          "w": 1400,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Genesis Plus GX",
+              "File": "genesis_plus_gx_libretro",
+              "ConfigFolder": "Genesis Plus GX"
+            },
+            {
+              "Name": "Genesis Plus GG - Split Core",
+              "File": "genesis_plus_gx_libretro-gg",
+              "ConfigFolder": "Genesis Plus GG"
             }
           ]
         }
@@ -233,6 +283,12 @@
         "SystemName": "ColecoVision",
         "BezelFolder": "ColecoVision",
         "RepositoryName": "ColecoVision",
+        "ViewPort": {
+          "x": 250,
+          "w": 1420,
+          "h": 1052,
+          "y": 18
+        },
         "Cores": {
           "Core": [
             {
@@ -295,17 +351,23 @@
         "SystemName": "Nintendo 64",
         "BezelFolder": "N64",
         "RepositoryName": "N64",
+        "ViewPort": {
+          "x": 246,
+          "w": 1428,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
               "Name": "Mupen64Plus",
-              "File": "mupen64_libretro",
-              "ConfigFolder": "Mupen64Plus"
+              "File": "mupen64plus_libretro",
+              "ConfigFolder": "Mupen64Plus OpenGL"
             },
             {
-              "Name": "Mupen64Plus GLES3",
-              "File": "mupen64_libretro",
-              "ConfigFolder": "Mupen64Plus GLES3"
+              "Name": "Mupen64Plus Next",
+              "File": "mupen64plus_next_libretro",
+              "ConfigFolder": "Mupen64Plus-Next OpenGL "
             }
           ]
         }
@@ -334,6 +396,12 @@
         "SystemName": "NEC PC Engine-CD",
         "BezelFolder": "PCE-CD",
         "RepositoryName": "PCE-CD",
+        "ViewPort": {
+          "x": 210,
+          "w": 1500,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
@@ -351,8 +419,14 @@
       },
       {
         "SystemName": "NEC PC Engine",
-        "BezelFolder": "PCEEngine",
+        "BezelFolder": "PCEngine",
         "RepositoryName": "PCEngine",
+        "ViewPort": {
+          "x": 210,
+          "w": 1500,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
@@ -367,6 +441,12 @@
         "SystemName": "TurboGraphx-16",
         "BezelFolder": "TG16",
         "RepositoryName": "TG16",
+        "ViewPort": {
+          "x": 210,
+          "w": 1500,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
@@ -386,6 +466,12 @@
         "SystemName": "TurboGraphx-16-CD",
         "BezelFolder": "TG-CD",
         "RepositoryName": "TG-CD",
+        "ViewPort": {
+          "x": 210,
+          "w": 1500,
+          "h": 1072,
+          "y": 4
+        },
         "Cores": {
           "Core": [
             {
@@ -546,6 +632,149 @@
               "Name": "MAME 2010",
               "File": "mame2010_libretro",
               "ConfigFolder": "MAME 2010"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Nintendo Game Boy Advance",
+        "BezelFolder": "GBA",
+        "RepositoryName": "GBA",
+        "ViewPort": {
+          "x": 110,
+          "w": 1700,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "VBA Next",
+              "File": "vba_next_libretro",
+              "ConfigFolder": "VBA Next"
+            },
+            {
+              "Name": "mGBA",
+              "File": "mgba_libretro",
+              "ConfigFolder": "mGBA"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Nintendo Game Boy",
+        "BezelFolder": "GB",
+        "RepositoryName": "GB",
+        "ViewPort": {
+          "x": 368,
+          "w": 1184,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Gambatte",
+              "File": "gambatte_libretro",
+              "ConfigFolder": "Gambatte"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Nintendo Game Boy Color",
+        "BezelFolder": "GBC",
+        "RepositoryName": "GBC",
+        "ViewPort": {
+          "x": 368,
+          "w": 1184,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Gambatte GBC",
+              "File": "gambatte_libretro-gbc",
+              "ConfigFolder": "Gamb_GBC"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega Dreamcast",
+        "BezelFolder": "Dreamcast",
+        "RepositoryName": "Dreamcast",
+        "ViewPort": {
+          "x": 246,
+          "w": 1428,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Flycast",
+              "File": "flycast_libretro",
+              "ConfigFolder": "Flycast"
+            },
+            {
+              "Name": "Reicast",
+              "File": "Reicast_libretro",
+              "ConfigFolder": "Reicast"
+            },
+            {
+              "Name": "redream",
+              "File": "redream_libretro",
+              "ConfigFolder": "Redream"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "Sega Saturn",
+        "BezelFolder": "Saturn",
+        "RepositoryName": "Saturn",
+        "ViewPort": {
+          "x": 246,
+          "w": 1428,
+          "h": 1072,
+          "y": 4
+        },
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Beetle Saturn",
+              "File": "mednafen_saturn_libretro",
+              "ConfigFolder": "Beetle Saturn"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "SNK Neo Geo Pocket",
+        "BezelFolder": "NGP",
+        "RepositoryName": "NGP",
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Beetle NeoPop",
+              "File": "mednafen_ngp_libretro",
+              "ConfigFolder": "Beetle NeoPop"
+            }
+          ]
+        }
+      },
+      {
+        "SystemName": "SNK Neo Geo Pocket Color",
+        "BezelFolder": "NGP",
+        "RepositoryName": "NGPC",
+        "Cores": {
+          "Core": [
+            {
+              "Name": "Beetle NeoPop",
+              "File": "mednafen_ngp_libretro",
+              "ConfigFolder": "Beetle NeoPop"
             }
           ]
         }

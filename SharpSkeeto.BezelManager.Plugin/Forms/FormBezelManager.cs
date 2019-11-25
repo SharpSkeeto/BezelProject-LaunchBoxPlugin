@@ -190,7 +190,9 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 				Task<bool> editFiles = null;
 				Task<bool> copyFiles = null;
 
-				string PackageUri = string.Format("https://github.com/thebezelproject/bezelproject-{0}/archive/master.zip", selectedPlatform.RepositoryName);
+				var bezelURI = (chkSystemArt.Checked) ? "https://github.com/thebezelproject/bezelprojectSA-{0}/archive/master.zip" : "https://github.com/thebezelproject/bezelproject-{0}/archive/master.zip";
+				
+				string PackageUri = string.Format(bezelURI, selectedPlatform.RepositoryName);
 
 				dl = DownloadMasterArchiveAsync(progress, PackageUri, token);
 
@@ -323,7 +325,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		{
 			try
 			{
-				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
+				var bezelRootDir = (chkSystemArt.Checked) ? "{0}bezelprojectSA-{1}-master" : "{0}bezelproject-{1}-master";
+				string rootDirectory = string.Format(bezelRootDir, PluginTempFolder, selectedPlatform.RepositoryName);
 				string OriginalPath = string.Empty;
 				string ReplacementPath = string.Empty;
 				
@@ -476,7 +479,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 		{
 			try
 			{
-				string rootDirectory = string.Format("{0}bezelproject-{1}-master", PluginTempFolder, selectedPlatform.RepositoryName);
+				var bezelRootDir = (chkSystemArt.Checked) ? "{0}bezelprojectSA-{1}-master" : "{0}bezelproject-{1}-master";
+				string rootDirectory = string.Format(bezelRootDir, PluginTempFolder, selectedPlatform.RepositoryName);
 				string emuOverlayPath = string.Empty;
 
 				if (!token.IsCancellationRequested)
@@ -503,7 +507,7 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 					}
 					else
 					{
-						emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", selectedPlatform.RepositoryName);
+						emuOverlayPath = Path.Combine($@"{EmulatorInstallPath}\overlays\GameBezels", selectedPlatform.BezelFolder);
 					}
 
 					Directory.CreateDirectory(emuOverlayPath);
@@ -681,6 +685,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			this.cbSystemList.Enabled = true;
 			this.cbCoreList.Enabled = true;
 			this.mainMenu.Enabled = true;
+			this.chkKeepMasterFile.Enabled = true;
+			this.chkSystemArt.Enabled = true;
 		}
 
 		private void ResetCompletedControls()
@@ -695,6 +701,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			this.cbSystemList.Enabled = true;
 			this.cbCoreList.Enabled = true;
 			this.mainMenu.Enabled = true;
+			this.chkKeepMasterFile.Enabled = true;
+			this.chkSystemArt.Enabled = true;
 		}
 
 		private void SetInProcessControls()
@@ -704,6 +712,8 @@ namespace SharpSkeeto.BezelManager.Plugin.Forms
 			this.cbCoreList.Enabled = false;
 			this.btnCancel.Enabled = true;
 			this.mainMenu.Enabled = false;
+			this.chkKeepMasterFile.Enabled = false;
+			this.chkSystemArt.Enabled = false;
 		}
 
 		/// <summary>

@@ -67,7 +67,7 @@ namespace SharpSkeeto.BezelManager.Plugin
 			}
 			else
 			{
-				fileContent = $@"input_overlay = "".\overlays\GameBezels\{selectedPlatform.RepositoryName}\{coreName}""" + "\n";
+				fileContent = $@"input_overlay = "".\overlays\GameBezels\{selectedPlatform.BezelFolder}\{coreName}""" + "\n";
 			}
 			fileContent += "config_save_on_exit = \"false\"\n";
 			fileContent += "input_overlay_enable = \"true\"\n";
